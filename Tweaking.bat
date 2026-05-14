@@ -1144,6 +1144,7 @@ echo Running Full Tweaks (%FULL_PROFILE%)...
 if /i "%FULL_PROFILE%"=="DEEPPLUS" echo Deep+ policy: skipping network tweaks that reduce download speed.
 if /i "%DEEPPLUS_VARIANT%"=="COMPETITIVE" echo Deep+ Competitive: enabling additional low-latency network priority tuning.
 set "FULL_TWEAKS_MODE=1"
+echo [FullTweaks] Applying Windows core tweaks...
 
 call :Telemtry
 call :Noti
@@ -1154,6 +1155,7 @@ call :Addi
 call :Wub
 call :cortana
 call :erorrep
+echo [FullTweaks] Applying Priority tweaks...
 call :gamemode
 call :telm
 call :appdiag
@@ -1171,6 +1173,7 @@ call :win25
 call :win26
 call :win27
 
+echo [FullTweaks] Applying Power tweaks...
 call :twk
 call :kbst
 call :dpower
@@ -1202,8 +1205,9 @@ call :wmngr
 call :pr11
 call :pr12
 
-if /i "%FULL_PROFILE%"=="DEEP" call :IO tweaks
-if /i "%FULL_PROFILE%"=="DEEPPLUS" call :IO tweaks
+echo [FullTweaks] Applying General tweaks...
+if /i "%FULL_PROFILE%"=="DEEP" call :IO_tweaks
+if /i "%FULL_PROFILE%"=="DEEPPLUS" call :IO_tweaks
 if /i "%FULL_PROFILE%"=="DEEPPLUS" call :fsutil
 if /i "%DEEPPLUS_VARIANT%"=="COMPETITIVE" call :n13
 if /i "%DEEPPLUS_VARIANT%"=="COMPETITIVE" call :n14
@@ -1229,6 +1233,7 @@ call :god21
 call :god22
 call :god24
 
+echo [FullTweaks] Applying BCD/Visual/USB/RAM tweaks...
 call :bcd
 call :per
 call :twkusb
@@ -1242,6 +1247,7 @@ call :memski
 call :memsk
 call :preftch
 call :Superfetch
+echo [FullTweaks] Applying GPU/BIOS/CPU/Input/DirectX tweaks...
 call :gengpu
 call :nv1
 call :nv2
@@ -4560,7 +4566,7 @@ echo.
 echo %b%__________________________________________________________________________________
 
 set /p input=:
-if /i %input% == 1 goto IO tweaks
+if /i %input% == 1 goto IO_tweaks
 if /i %input% == 2 goto latency
 if /i %input% == 3 goto mitigation
 if /i %input% == 4 goto Kernel
@@ -8294,7 +8300,7 @@ timeout /t 1 /nobreak > NUL
 
 :: Set MTU Size to 1500
 echo Setting MTU Size
-netsh interface ipv4 set subinterface “Ethernet” mtu=1500 store=persistent
+netsh interface ipv4 set subinterface "Ethernet" mtu=1500 store=persistent
 timeout /t 1 /nobreak > NUL
 
 :: Disable NonSackRTTresiliency
