@@ -1134,6 +1134,7 @@ echo  [USB/Mouse] input delay-- responsiveness++
 echo  [Storage/RAM] I/O latency-- memory behavior tuned
 echo  [Network] Deep+ keeps download speed equal or better (no bufferbloat-slow profile)
 if /i "%DEEPPLUS_VARIANT%"=="COMPETITIVE" echo  [Competitive] adds adapter priority tuning for lower latency
+echo  [Competitive] applies Anti-Stutter guard (MMCSS/Network throttling)
 echo.
 set /p confirm=%g%Apply these tweaks now? (YES/NO): %w%
 if /i not "%confirm%"=="YES" goto menu
@@ -1206,6 +1207,7 @@ if /i "%FULL_PROFILE%"=="DEEPPLUS" call :IO tweaks
 if /i "%FULL_PROFILE%"=="DEEPPLUS" call :fsutil
 if /i "%DEEPPLUS_VARIANT%"=="COMPETITIVE" call :n13
 if /i "%DEEPPLUS_VARIANT%"=="COMPETITIVE" call :n14
+if /i "%DEEPPLUS_VARIANT%"=="COMPETITIVE" call :compguard
 call :latency
 call :Kernel
 call :random
@@ -1292,6 +1294,18 @@ echo %b%║  %w%  Full Tweaks Completed, Press any key to continue...  %b%║
 echo %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+goto menu
+
+
+:compguard
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v "NetworkThrottlingIndex" /t REG_DWORD /d 4294967295 /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v "SystemResponsiveness" /t REG_DWORD /d 0 /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v "AlwaysOn" /t REG_DWORD /d 1 /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "GPU Priority" /t REG_DWORD /d 8 /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "Priority" /t REG_DWORD /d 6 /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "Scheduling Category" /t REG_SZ /d "High" /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "SFIO Priority" /t REG_SZ /d "High" /f
+if defined FULL_TWEAKS_MODE goto :eof
 goto menu
 
 :wsettings
