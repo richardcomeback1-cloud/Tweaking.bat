@@ -2,7 +2,7 @@
 
 @echo off
 color 0D
-title Kiwi tweaks
+title Kiwi tweaks [FullTweaks Build]
 
 for /F "tokens=2 delims=:." %%i in ('ver') do set "ver=%%i"
 set /a ver=ver
@@ -143,6 +143,7 @@ echo %w%Any distribution, resseling etc is NOT tolerated.
 echo.
 echo %w%Type numbers/letters to select your options
 echo %w%Read All warnings, popups etc... dont just blindly press buttons without reading
+echo %y%Running script: %~f0
 echo.
 echo %b%__________________________________________________________________________________
 echo. 
@@ -160,7 +161,7 @@ cls
 :menu
 cls                                                                                  
 echo %b%__________________________________________________________________________________
-echo %w%                                KXWIES Free Utility 1.5
+echo %w%                                KXWIES Free Utility 1.5-FULL22
 echo %b%__________________________________________________________________________________
 echo.
 echo    %p%[1]%w%  Windows Tweaks                %p%[2]%w%  Network Tweaks
