@@ -173,7 +173,7 @@ echo    %p%[13]%w% GPU Tweaks                    %p%[14]%w% BIOS Tweaks
 echo    %p%[15]%w% CPU Tweaks                    %p%[16]%w% Mouse and Keyboard Tweaks
 echo    %p%[17]%w% Clean System                  %p%[18]%w% DirectX Tweaks
 echo    %p%[19]%w% Additional Tweaks             %p%[20]%w% Debloat
-echo    %p%[21]%w% Game Optimization       
+echo    %p%[21]%w% Game Optimization             %p%[22]%w% Full Tweaks
 echo.      
 echo    %p%[F]%w%  Reverts / Fixes               %p%[E]%w%  Kiwis Socials
 echo    %p%[S]%w%  Use Restore Point             %p%[X]%w%  Exit
@@ -203,6 +203,7 @@ if /i "%input%"=="18" goto directx
 if /i "%input%"=="19" goto more
 if /i "%input%"=="20" goto debloat
 if /i "%input%"=="21" goto real
+if /i "%input%"=="22" goto fulltweaks
 
 if /i "%input%"=="S" goto restore
 if /i "%input%"=="X" goto exit
@@ -301,6 +302,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto menu
 
 :exit
@@ -327,6 +329,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 
@@ -666,6 +669,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 
@@ -688,6 +692,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 :c16
@@ -703,6 +708,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 
@@ -716,6 +722,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 :c12
@@ -731,6 +738,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 :c14
@@ -747,6 +755,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 :c13
@@ -763,6 +772,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 :c11
@@ -778,6 +788,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 :c7
@@ -792,6 +803,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 
@@ -807,6 +819,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 
@@ -822,6 +835,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 
@@ -839,6 +853,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 :c6
@@ -854,6 +869,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 
@@ -869,6 +885,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 :c10
@@ -884,6 +901,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 :c3
@@ -901,6 +919,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 
@@ -973,6 +992,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 
@@ -1028,6 +1048,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 echo.
@@ -1038,6 +1059,7 @@ echo.                                                    %w%  Operation Complete
 echo.                                              %b%"I═══════════════════════════════════════════════════════I"
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 
@@ -1048,6 +1070,206 @@ goto :menu
 
 :Kiwi
 start https://discord.gg/XMafsrYN
+cls
+goto menu
+
+
+:fulltweaks
+cls
+echo.
+echo %b%__________________________________________________________________________________
+echo %w%                         Full Tweaks Mode Selection
+echo %b%__________________________________________________________________________________
+echo.
+echo %p%[1]%w% Safe Full Tweaks (recommended)
+echo %p%[2]%w% Deep Full Tweaks (aggressive)
+echo %p%[3]%w% Deep+ Full Tweaks (max, no slow-download net tweaks)
+echo.
+echo %w%Type X to return to menu
+set /p fullmode=:
+if /i "%fullmode%"=="1" set "FULL_PROFILE=SAFE"
+if /i "%fullmode%"=="2" set "FULL_PROFILE=DEEP"
+if /i "%fullmode%"=="3" set "FULL_PROFILE=DEEPPLUS"
+if /i "%fullmode%"=="X" goto menu
+if not defined FULL_PROFILE goto fulltweaks
+
+cls
+echo %y%Full Tweaks Profile: %FULL_PROFILE%
+echo.
+echo %w%This will adjust:
+echo  - Windows Tweaks (except Bluetooth/Printing+Maps)
+echo  - Power Tweaks (except Set Power Plan)
+echo  - Priority Tweaks
+echo  - General Tweaks (except Disable Mitigations/Hyper-V/Force Monitor HZ)
+echo  - BCDEdit Tweaks
+echo  - Visual Tweaks (except Performance Options)
+echo  - USB Tweaks
+echo  - RAM Tweaks
+echo  - GPU Tweaks (except AMD/Intel branches)
+echo  - BIOS Tweaks
+echo  - CPU Tweaks (except AMD CPU Tweaks)
+echo  - Mouse/Keyboard Tweaks (except Data Queue Size)
+echo  - DirectX Tweaks
+echo.
+echo %y%Impact summary by category:%w%
+echo  [Windows/General] privacy++ background load-- compatibility risk low-med
+echo  [Power/CPU/GPU] latency-- fps stability++ heat/power usage++
+echo  [USB/Mouse] input delay-- responsiveness++
+echo  [Storage/RAM] I/O latency-- memory behavior tuned
+echo  [Network] Deep+ keeps download speed equal or better (no bufferbloat-slow profile)
+echo.
+set /p confirm=%g%Apply these tweaks now? (YES/NO): %w%
+if /i not "%confirm%"=="YES" goto menu
+
+cls
+echo Running Full Tweaks (%FULL_PROFILE%)...
+if /i "%FULL_PROFILE%"=="DEEPPLUS" echo Deep+ policy: skipping network tweaks that reduce download speed.
+set "FULL_TWEAKS_MODE=1"
+
+call :Telemtry
+call :Noti
+call :Explorer
+call :Wintwk
+call :Menuk
+call :Addi
+call :Wub
+call :cortana
+call :erorrep
+call :gamemode
+call :telm
+call :appdiag
+call :synchr
+call :cliep
+call :onlyimp
+call :win17
+call :win19
+call :win20
+call :win21
+call :win22
+call :win23
+call :win24
+call :win25
+call :win26
+call :win27
+
+call :twk
+call :kbst
+call :dpower
+call :pst
+call :throttoling
+call :idlepwr
+call :linkpwr
+call :wpower
+if /i "%FULL_PROFILE%"=="DEEP" call :gpuenrg
+if /i "%FULL_PROFILE%"=="DEEPPLUS" call :gpuenrg
+call :p11
+call :p12
+call :p13
+call :p14
+call :p15
+call :p16
+call :p17
+
+call :game
+call :SvcPriority
+call :gamepriority
+call :w32prio
+call :thrprio
+call :sysrep
+call :irq8
+call :IRQ16
+call :crss
+call :wmngr
+call :pr11
+call :pr12
+
+if /i "%FULL_PROFILE%"=="DEEP" call :IO tweaks
+if /i "%FULL_PROFILE%"=="DEEPPLUS" call :IO tweaks
+if /i "%FULL_PROFILE%"=="DEEPPLUS" call :fsutil
+call :latency
+call :Kernel
+call :random
+call :OneDrive
+call :RPolicy
+call :insd
+call :autolog
+call :10ski
+call :nolazy
+call :searchopt
+call :NFTS
+call :latencytolernace
+call :GameDVR
+call :reinforce
+call :Multi
+call :SMB
+call :Firm
+call :god21
+call :god22
+call :god24
+
+call :bcd
+call :per
+call :twkusb
+call :savingp
+call :usb1
+call :umsi
+call :usb2
+call :svc
+call :reged
+call :memski
+call :memsk
+call :preftch
+call :Superfetch
+call :gengpu
+call :nv1
+call :nv2
+call :nv4
+call :nv5
+call :nv6
+call :nv7
+call :nv8
+call :nv9
+call :nv10
+call :nv11
+call :nv12
+call :nv13
+call :nv14
+call :nv15
+call :nv16
+call :bios
+call :c1
+call :c2
+call :c3
+call :c4
+call :c5
+call :c6
+call :c7
+call :c8
+call :c9
+call :c10
+call :c11
+call :c12
+call :c13
+call :c14
+call :c15
+call :c16
+call :c17
+call :thread
+call :crss
+call :mouaccel
+call :repeat
+call :mousecntrl
+call :1to1
+call :filter
+call :directx
+
+set "FULL_TWEAKS_MODE="
+set "FULL_PROFILE="
+echo.
+echo %b%╔═══════════════════════════════════════════════════════╗
+echo %b%║  %w%  Full Tweaks Completed, Press any key to continue...  %b%║
+echo %b%╚═══════════════════════════════════════════════════════╝
+pause > nul
 cls
 goto menu
 
@@ -1166,6 +1388,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto menu
 
 :win25
@@ -1209,6 +1432,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :win24
@@ -1221,6 +1445,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :win23
@@ -1235,6 +1460,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 
@@ -1264,6 +1490,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 
@@ -1282,6 +1509,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :win20
@@ -1306,6 +1534,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 
@@ -1322,6 +1551,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :win18
@@ -1336,6 +1566,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :win17
@@ -1360,6 +1591,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :stopdev
@@ -1388,6 +1620,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 :Bluetooth
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\BTAGService" /v "Start" /t REG_DWORD /d "4" /f
@@ -1402,6 +1635,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 
@@ -1428,6 +1662,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :cliep
@@ -1451,6 +1686,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :synchr
@@ -1472,6 +1708,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :appdiag
@@ -1522,6 +1759,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 
@@ -1616,6 +1854,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 
@@ -1669,6 +1908,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :gmodeOFF
@@ -1682,6 +1922,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :Cortana
@@ -1703,6 +1944,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :win26
@@ -1837,6 +2079,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :Noti
@@ -1871,6 +2114,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :Wintwk
@@ -1901,6 +2145,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :Menuk
@@ -1919,6 +2164,7 @@ echo.                                                    %w%  Operation Complete
 echo.                                              %b%"I═══════════════════════════════════════════════════════I"
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 
@@ -1946,6 +2192,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :Addi
@@ -1981,6 +2228,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 
@@ -2086,6 +2334,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 
@@ -2527,6 +2776,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 :chrome
@@ -2699,6 +2949,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 
@@ -2753,6 +3004,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto menu
 
 :per
@@ -2835,6 +3087,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 :gpu
@@ -3054,6 +3307,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :gpu
 
 :nvgpu
@@ -3491,6 +3745,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 
@@ -3925,6 +4180,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :gpu
 
 
@@ -3962,6 +4218,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :gpu
 
 
@@ -4035,6 +4292,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 
@@ -4050,6 +4308,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :usb
 
 :umsi
@@ -4067,6 +4326,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :usb
 
 :savingp
@@ -4126,6 +4386,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :usb
 
 :twkusb
@@ -4148,6 +4409,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :usb
 
 
@@ -4216,6 +4478,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 
@@ -4318,6 +4581,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :MENU
 
 :god23
@@ -4383,6 +4647,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :75h
@@ -4396,6 +4661,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :120h
@@ -4409,6 +4675,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :144h
@@ -4422,6 +4689,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :160h
@@ -4435,6 +4703,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :165h
@@ -4448,6 +4717,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :240h
@@ -4461,6 +4731,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :280h
@@ -4474,6 +4745,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :360h
@@ -4487,6 +4759,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 
@@ -4502,6 +4775,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :god21
@@ -4518,6 +4792,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 :Multi
 ::MICROSOFT MULTIMEDIA TWEAKS
@@ -4533,6 +4808,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :SMB
@@ -4555,6 +4831,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 :firm
 ::Enable Memory Mapping for PCI-E devices
@@ -4571,6 +4848,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :reinforce
@@ -4604,6 +4882,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 
@@ -4620,6 +4899,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :game
@@ -4637,6 +4917,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 
@@ -4669,6 +4950,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :latencytolernace
@@ -4699,6 +4981,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :searchopt
@@ -4732,6 +5015,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :NFTS
@@ -4748,6 +5032,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 
@@ -4783,6 +5068,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :god12
@@ -4795,6 +5081,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :nolazy
@@ -4808,6 +5095,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :10ski
@@ -4820,6 +5108,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 
@@ -4873,6 +5162,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :insd
@@ -4886,6 +5176,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 
@@ -4911,6 +5202,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 
@@ -4969,6 +5261,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :mitigation
@@ -5053,6 +5346,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :wub
@@ -5128,6 +5422,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 
@@ -5156,6 +5451,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 
@@ -5178,6 +5474,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :random
@@ -5218,6 +5515,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 
@@ -5339,6 +5637,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 :memski
@@ -5353,6 +5652,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :ram
 
 :memsk
@@ -5367,6 +5667,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :ram
 
 :preftch
@@ -5381,6 +5682,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :ram
 
 
@@ -5395,6 +5697,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :ram
 
 :reged
@@ -5440,6 +5743,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :ram
 
 
@@ -5592,6 +5896,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 
@@ -5662,6 +5967,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :priority
 
 :pr11
@@ -5687,6 +5993,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :priority
 
 :pr12
@@ -5788,6 +6095,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 
@@ -5802,6 +6110,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :priority
 
 :gamepriority
@@ -5987,6 +6296,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto menu
 
 :fivem
@@ -6710,6 +7020,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :priority
 
 :wmngr
@@ -6727,6 +7038,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :priority
 
 :crss
@@ -6741,6 +7053,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :priority
 
 :irq8
@@ -6754,6 +7067,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :priority
 
 :irq16
@@ -6767,6 +7081,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :priority
 
 
@@ -6783,6 +7098,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :priority
 
 
@@ -6799,6 +7115,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :priority
 
 :sysrep
@@ -6811,6 +7128,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :priority
 
 
@@ -6910,6 +7228,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto menu
 
 
@@ -6928,6 +7247,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto power
 
 :p14
@@ -6943,6 +7263,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 :p11
@@ -6959,6 +7280,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 :gpuenrg
@@ -6972,6 +7294,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 :dpower
@@ -6990,6 +7313,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 
@@ -7011,6 +7335,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 :wpower
@@ -7044,6 +7369,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 :kbst
@@ -7060,6 +7386,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 
@@ -7096,6 +7423,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 
@@ -7116,6 +7444,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 
@@ -7140,6 +7469,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 
@@ -7157,6 +7487,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 :p15
@@ -7185,6 +7516,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 :linkpwr
@@ -7206,6 +7538,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 :idlepwr
@@ -7220,6 +7553,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 
@@ -7276,6 +7610,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 
@@ -7338,6 +7673,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 :revrt
@@ -7358,6 +7694,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 
@@ -7438,6 +7775,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 
@@ -7458,6 +7796,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :mouse
 
 :1to1
@@ -7475,6 +7814,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :mouse
 
 :thread
@@ -7491,6 +7831,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :mouse
 
 
@@ -7511,6 +7852,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :mouse
 
 
@@ -7530,6 +7872,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :mouse
 
 
@@ -7577,6 +7920,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :mouse
 
 
@@ -7647,6 +7991,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :mouse
 
 :15
@@ -7662,6 +8007,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :mouse
 
 :17
@@ -7677,6 +8023,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :mouse
 
 :20
@@ -7692,6 +8039,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :mouse
 
 :25
@@ -7707,6 +8055,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :mouse
 
 :30
@@ -7722,6 +8071,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :mouse
 
 
@@ -7737,6 +8087,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :mouse
 
 
@@ -7775,6 +8126,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :Menu
 
 
@@ -8583,6 +8935,7 @@ echo.                                              %b%║  %w%  Operation Comple
 echo.                                              %b%╚═══════════════════════════════════════════════════════╝
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 
