@@ -2,7 +2,7 @@
 
 @echo off
 color 0D
-title Kiwi tweaks
+title Kiwi tweaks [FullTweaks Build]
 
 for /F "tokens=2 delims=:." %%i in ('ver') do set "ver=%%i"
 set /a ver=ver
@@ -113,9 +113,9 @@ chcp 65001 >nul 2>&1
 echo.
 echo.
 echo.
-echo %b%╔═══════════════════════════════════════════════════════╗
-echo %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo %b%╚═══════════════════════════════════════════════════════╝
+echo %b%[=======================================================]
+echo %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo %b%[=======================================================]
 pause > nul
 cls
 goto warning
@@ -143,14 +143,15 @@ echo %w%Any distribution, resseling etc is NOT tolerated.
 echo.
 echo %w%Type numbers/letters to select your options
 echo %w%Read All warnings, popups etc... dont just blindly press buttons without reading
+echo %y%Running script: %~f0
 echo.
 echo %b%__________________________________________________________________________________
 echo. 
 echo.
 echo.
-echo %b%I═══════════════════════════════════════════════════════I
+echo %b%I=======================================================I
 echo %w%             Press any key to continue...
-echo %b%I═══════════════════════════════════════════════════════I
+echo %b%I=======================================================I
 pause > nul
 cls
 
@@ -160,7 +161,7 @@ cls
 :menu
 cls                                                                                  
 echo %b%__________________________________________________________________________________
-echo %w%                                KXWIES Free Utility 1.5
+echo %w%                                KXWIES Free Utility 1.5-FULL22
 echo %b%__________________________________________________________________________________
 echo.
 echo    %p%[1]%w%  Windows Tweaks                %p%[2]%w%  Network Tweaks
@@ -173,7 +174,7 @@ echo    %p%[13]%w% GPU Tweaks                    %p%[14]%w% BIOS Tweaks
 echo    %p%[15]%w% CPU Tweaks                    %p%[16]%w% Mouse and Keyboard Tweaks
 echo    %p%[17]%w% Clean System                  %p%[18]%w% DirectX Tweaks
 echo    %p%[19]%w% Additional Tweaks             %p%[20]%w% Debloat
-echo    %p%[21]%w% Game Optimization       
+echo    %p%[21]%w% Game Optimization             %p%[22]%w% Full Tweaks
 echo.      
 echo    %p%[F]%w%  Reverts / Fixes               %p%[E]%w%  Kiwis Socials
 echo    %p%[S]%w%  Use Restore Point             %p%[X]%w%  Exit
@@ -203,6 +204,7 @@ if /i "%input%"=="18" goto directx
 if /i "%input%"=="19" goto more
 if /i "%input%"=="20" goto debloat
 if /i "%input%"=="21" goto real
+if /i "%input%"=="22" goto fulltweaks
 
 if /i "%input%"=="S" goto restore
 if /i "%input%"=="X" goto exit
@@ -232,9 +234,9 @@ rstrui.exe
 echo.
 echo.
 echo.
-echo %b%╔═══════════════════════════════════════════════════════╗
-echo %b%║  %w%  Operation Completed, Press any key to continue...   %b%║
-echo %b%╚═══════════════════════════════════════════════════════╝
+echo %b%[=======================================================]
+echo %b%|  %w%  Operation Completed, Press any key to continue...   %b%|
+echo %b%[=======================================================]
 pause > nul
 cls
 
@@ -296,22 +298,23 @@ timeout /t 1 /nobreak > NUL
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto menu
 
 :exit
 cls
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║   %w%RESTART YOUR PC, THE TWEAKS WONT WORK WITHOUT IT!    %b%║
-echo.                                              %b%║═══════════════════════════════════════════════════════║  
-echo.                                              %b%║  %w%             Press any key to exit...                %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|   %w%RESTART YOUR PC, THE TWEAKS WONT WORK WITHOUT IT!    %b%|
+echo.                                              %b%|=======================================================|  
+echo.                                              %b%|  %w%             Press any key to exit...                %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 exit
@@ -322,11 +325,12 @@ start https://kiwitweaks.vercel.app/
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 
@@ -365,14 +369,14 @@ goto :Fixes
 :Reinstall
 cls
 chcp 437 > nul
-Powershell -Command "Get-AppxPackage -allusers | foreach {Add-AppxPackage -register “$($_.InstallLocation)\appxmanifest.xml” -DisableDevelopmentMode}"
+Powershell -Command "Get-AppxPackage -allusers | foreach {Add-AppxPackage -register "$($_.InstallLocation)\appxmanifest.xml" -DisableDevelopmentMode}"
 chcp 65001 > nul
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :Fixes
@@ -382,9 +386,9 @@ Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "AltTab
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :Fixes
@@ -403,7 +407,7 @@ echo.
 echo.
 echo %w%Type "X" to go back to menu
 echo.
-echo %b%════════════════════════════════════════════════════════════════════════
+echo %b%========================================================================
 set /p input=:
 if /i %input% == 1 goto realfn
 if /i %input% == 2 goto fnset
@@ -427,9 +431,9 @@ goto :real
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :real
@@ -487,9 +491,9 @@ ping ping-eu.ds.on.epicgames.com -n 25
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :realfn
@@ -499,9 +503,9 @@ ping ping-nae.ds.on.epicgames.com -n 25
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :realfn
@@ -511,9 +515,9 @@ ping ping-nac.ds.on.epicgames.com -n 25
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :realfn
@@ -523,9 +527,9 @@ ping ping-naw.ds.on.epicgames.com -n 25
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :realfn
@@ -535,9 +539,9 @@ ping ping-asia.ds.on.epicgames.com -n 25
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :realfn
@@ -547,9 +551,9 @@ ping ping-oce.ds.on.epicgames.com -n 25
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :realfn
@@ -559,9 +563,9 @@ ping ping-me.ds.on.epicgames.com -n 25
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :realfn
@@ -571,9 +575,9 @@ ping ping-br.ds.on.epicgames.com -n 25
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :realfn
@@ -661,11 +665,12 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "EventProcessorEnabled"
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 
@@ -683,11 +688,12 @@ for %%i in (WakeEnabled WdkSelectiveSuspendEnable) do (
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 :c16
@@ -698,11 +704,12 @@ Powercfg -setactive scheme_current
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 
@@ -711,11 +718,12 @@ bcdedit /set {current} numproc %NUMBER_OF_PROCESSORS%
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 :c12
@@ -726,11 +734,12 @@ powercfg /setactive SCHEME_CURRENT
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 :c14
@@ -742,11 +751,12 @@ Powercfg -setactive scheme_current
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 :c13
@@ -758,11 +768,12 @@ Powercfg -setactive scheme_current
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 :c11
@@ -773,11 +784,12 @@ powercfg /setactive SCHEME_CURRENT
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 :c7
@@ -787,11 +799,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AmdPPM" /v Start /t REG_DWOR
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 
@@ -802,11 +815,12 @@ powercfg /setactive SCHEME_CURRENT
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 
@@ -817,11 +831,12 @@ powercfg /setactive SCHEME_CURRENT
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 
@@ -834,11 +849,12 @@ powercfg /setactive SCHEME_CURRENT
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 :c6
@@ -849,11 +865,12 @@ powercfg /setactive SCHEME_CURRENT
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 
@@ -864,11 +881,12 @@ powercfg /setactive SCHEME_CURRENT
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 :c10
@@ -879,11 +897,12 @@ powercfg /setactive SCHEME_CURRENT
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 :c3
@@ -896,11 +915,12 @@ powercfg /setactive SCHEME_CURRENT
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 
@@ -968,11 +988,12 @@ Reg.exe add "HKLM\SYSTEM\ControlSet001\Control\Processor" /v "ProccesorLatencyTh
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 
@@ -1023,21 +1044,23 @@ Reg.exe add "HKLM\SYSTEM\ControlSet001\Control\Processor" /v "CpuIdleScrubValueD
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :cpu
 
 echo.
 echo.
 echo.
-echo.                                              %b%"I═══════════════════════════════════════════════════════I"
+echo.                                              %b%"I=======================================================I"
 echo.                                                    %w%  Operation Completed, Press any key to continue...
-echo.                                              %b%"I═══════════════════════════════════════════════════════I"
+echo.                                              %b%"I=======================================================I"
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 
@@ -1049,6 +1072,247 @@ goto :menu
 :Kiwi
 start https://discord.gg/XMafsrYN
 cls
+goto menu
+
+
+:fulltweaks
+cls
+echo.
+echo %b%__________________________________________________________________________________
+echo %w%                         Full Tweaks Mode Selection
+echo %b%__________________________________________________________________________________
+echo.
+echo %p%[1]%w% Safe Full Tweaks (recommended)
+echo %p%[2]%w% Deep Full Tweaks (aggressive)
+echo %p%[3]%w% Deep+ Full Tweaks (max, no slow-download net tweaks)
+echo.
+echo %w%Type X to return to menu
+set /p fullmode=:
+if /i "%fullmode%"=="1" set "FULL_PROFILE=SAFE"
+if /i "%fullmode%"=="2" set "FULL_PROFILE=DEEP"
+if /i "%fullmode%"=="3" set "FULL_PROFILE=DEEPPLUS"
+if /i "%fullmode%"=="X" goto menu
+if not defined FULL_PROFILE goto fulltweaks
+
+if /i "%FULL_PROFILE%"=="DEEPPLUS" (
+  cls
+  echo.
+  echo %b%__________________________________________________________________________________
+  echo %w%                    Deep+ Variant Selection
+  echo %b%__________________________________________________________________________________
+  echo.
+  echo %p%[1]%w% Balanced (recommended)
+  echo %p%[2]%w% Competitive (max latency focus)
+  set /p dvariant=: 
+  if /i "%dvariant%"=="1" set "DEEPPLUS_VARIANT=BALANCED"
+  if /i "%dvariant%"=="2" set "DEEPPLUS_VARIANT=COMPETITIVE"
+  if not defined DEEPPLUS_VARIANT goto fulltweaks
+)
+
+cls
+echo %y%Full Tweaks Profile: %FULL_PROFILE%
+if /i "%FULL_PROFILE%"=="DEEPPLUS" echo %y%Deep+ Variant: %DEEPPLUS_VARIANT%
+echo.
+echo %w%This will adjust:
+echo  - Windows Tweaks (except Bluetooth/Printing+Maps)
+echo  - Power Tweaks (except Set Power Plan)
+echo  - Priority Tweaks
+echo  - General Tweaks (except Disable Mitigations/Hyper-V/Force Monitor HZ)
+echo  - BCDEdit Tweaks
+echo  - Visual Tweaks (except Performance Options)
+echo  - USB Tweaks
+echo  - RAM Tweaks
+echo  - GPU Tweaks (except AMD/Intel branches)
+echo  - BIOS Tweaks
+echo  - CPU Tweaks (except AMD CPU Tweaks)
+echo  - Mouse/Keyboard Tweaks (except Data Queue Size)
+echo  - DirectX Tweaks
+echo.
+echo %y%Impact summary by category:%w%
+echo  [Windows/General] privacy++ background load-- compatibility risk low-med
+echo  [Power/CPU/GPU] latency-- fps stability++ heat/power usage++
+echo  [USB/Mouse] input delay-- responsiveness++
+echo  [Storage/RAM] I/O latency-- memory behavior tuned
+echo  [Network] Deep+ keeps download speed equal or better (no bufferbloat-slow profile)
+if /i "%DEEPPLUS_VARIANT%"=="COMPETITIVE" echo  [Competitive] adds adapter priority tuning for lower latency
+echo  [Competitive] applies Anti-Stutter guard (MMCSS/Network throttling)
+echo.
+set /p confirm=%g%Apply these tweaks now? (YES/NO): %w%
+if /i not "%confirm%"=="YES" goto menu
+
+cls
+echo Running Full Tweaks (%FULL_PROFILE%)...
+if /i "%FULL_PROFILE%"=="DEEPPLUS" echo Deep+ policy: skipping network tweaks that reduce download speed.
+if /i "%DEEPPLUS_VARIANT%"=="COMPETITIVE" echo Deep+ Competitive: enabling additional low-latency network priority tuning.
+set "FULL_TWEAKS_MODE=1"
+echo [FullTweaks] Applying Windows core tweaks...
+
+call :Telemtry
+call :Noti
+call :Explorer
+call :Wintwk
+call :Menuk
+call :Addi
+call :Wub
+call :cortana
+call :erorrep
+echo [FullTweaks] Applying Priority tweaks...
+call :gamemode
+call :telm
+call :appdiag
+call :synchr
+call :cliep
+call :onlyimp
+call :win17
+call :win19
+call :win20
+call :win21
+call :win22
+call :win23
+call :win24
+call :win25
+call :win26
+call :win27
+
+echo [FullTweaks] Applying Power tweaks...
+call :twk
+call :kbst
+call :dpower
+call :pst
+call :throttoling
+call :idlepwr
+call :linkpwr
+call :wpower
+if /i "%FULL_PROFILE%"=="DEEP" call :gpuenrg
+if /i "%FULL_PROFILE%"=="DEEPPLUS" call :gpuenrg
+call :p11
+call :p12
+call :p13
+call :p14
+call :p15
+call :p16
+call :p17
+
+call :game
+call :SvcPriority
+call :gamepriority
+call :w32prio
+call :thrprio
+call :sysrep
+call :irq8
+call :IRQ16
+call :crss
+call :wmngr
+call :pr11
+call :pr12
+
+echo [FullTweaks] Applying General tweaks...
+if /i "%FULL_PROFILE%"=="DEEP" call :IO_tweaks
+if /i "%FULL_PROFILE%"=="DEEPPLUS" call :IO_tweaks
+if /i "%FULL_PROFILE%"=="DEEPPLUS" call :fsutil
+if /i "%DEEPPLUS_VARIANT%"=="COMPETITIVE" call :n13
+if /i "%DEEPPLUS_VARIANT%"=="COMPETITIVE" call :n14
+if /i "%DEEPPLUS_VARIANT%"=="COMPETITIVE" call :compguard
+call :latency
+call :Kernel
+call :random
+call :OneDrive
+call :RPolicy
+call :insd
+call :autolog
+call :10ski
+call :nolazy
+call :searchopt
+call :NFTS
+call :latencytolernace
+call :GameDVR
+call :reinforce
+call :Multi
+call :SMB
+call :Firm
+call :god21
+call :god22
+call :god24
+
+echo [FullTweaks] Applying BCD/Visual/USB/RAM tweaks...
+call :bcd
+call :per
+call :twkusb
+call :savingp
+call :usb1
+call :umsi
+call :usb2
+call :svc
+call :reged
+call :memski
+call :memsk
+call :preftch
+call :Superfetch
+echo [FullTweaks] Applying GPU/BIOS/CPU/Input/DirectX tweaks...
+call :gengpu
+call :nv1
+call :nv2
+call :nv4
+call :nv5
+call :nv6
+call :nv7
+call :nv8
+call :nv9
+call :nv10
+call :nv11
+call :nv12
+call :nv13
+call :nv14
+call :nv15
+call :nv16
+call :bios
+call :c1
+call :c2
+call :c3
+call :c4
+call :c5
+call :c6
+call :c7
+call :c8
+call :c9
+call :c10
+call :c11
+call :c12
+call :c13
+call :c14
+call :c15
+call :c16
+call :c17
+call :thread
+call :crss
+call :mouaccel
+call :repeat
+call :mousecntrl
+call :1to1
+call :filter
+call :directx
+
+set "FULL_TWEAKS_MODE="
+set "FULL_PROFILE="
+set "DEEPPLUS_VARIANT="
+echo.
+echo %b%[=======================================================]
+echo %b%|  %w%  Full Tweaks Completed, Press any key to continue...  %b%|
+echo %b%[=======================================================]
+pause > nul
+cls
+goto menu
+
+
+:compguard
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v "NetworkThrottlingIndex" /t REG_DWORD /d 4294967295 /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v "SystemResponsiveness" /t REG_DWORD /d 0 /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v "AlwaysOn" /t REG_DWORD /d 1 /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "GPU Priority" /t REG_DWORD /d 8 /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "Priority" /t REG_DWORD /d 6 /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "Scheduling Category" /t REG_SZ /d "High" /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "SFIO Priority" /t REG_SZ /d "High" /f
+if defined FULL_TWEAKS_MODE goto :eof
 goto menu
 
 :wsettings
@@ -1161,11 +1425,12 @@ REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Messaging" /F /V
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto menu
 
 :win25
@@ -1204,11 +1469,12 @@ Reg.exe add "HKCU\Software\Microsoft\Office\16.0\OSM\preventedsolutiontypes" /v 
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :win24
@@ -1216,11 +1482,12 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\FTH" /v "Enabled" /t REG_DWORD /d "0" /f
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :win23
@@ -1230,11 +1497,12 @@ Reg.exe add "HKU\!USER_SID!\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost" /
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 
@@ -1259,11 +1527,12 @@ Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessMana
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 
@@ -1277,11 +1546,12 @@ Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManag
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :win20
@@ -1301,11 +1571,12 @@ Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManag
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 
@@ -1317,11 +1588,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\dam" /v "Start" /t REG_DWORD
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :win18
@@ -1331,11 +1603,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\MapsBroker" /v "Start" /t RE
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :win17
@@ -1355,11 +1628,12 @@ schtasks /change /tn "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSys
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :stopdev
@@ -1383,11 +1657,12 @@ Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\DeviceAccess\Global\
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 :Bluetooth
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\BTAGService" /v "Start" /t REG_DWORD /d "4" /f
@@ -1397,11 +1672,12 @@ Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\BluetoothUserServi
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 
@@ -1423,11 +1699,12 @@ Reg.exe add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\WiFiSession" /
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :cliep
@@ -1446,11 +1723,12 @@ Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\AppCompat" /v "DisablePCA"
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :synchr
@@ -1467,11 +1745,12 @@ Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\W
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :appdiag
@@ -1517,11 +1796,12 @@ Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManag
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 
@@ -1611,11 +1891,12 @@ Reg.exe add "HKCU\Control Panel\International\User Profile" /v "HttpAcceptLangua
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 
@@ -1664,11 +1945,12 @@ Reg.exe add "HKCU\SOFTWARE\Microsoft\GameBar" /v "AutoGameModeEnabled" /t REG_DW
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :gmodeOFF
@@ -1677,11 +1959,12 @@ Reg.exe add "HKCU\SOFTWARE\Microsoft\GameBar" /v "AutoGameModeEnabled" /t REG_DW
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :Cortana
@@ -1698,11 +1981,12 @@ chcp 65001 > nul
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :win26
@@ -1714,9 +1998,9 @@ Reg.exe add "HKCU\SOFTWARE\Microsoft\Assistance\Client\1.0\Settings" /v "Implici
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls 
 goto wsettings
@@ -1776,9 +2060,9 @@ Reg.exe add "HKLM\Software\Microsoft\Windows\Windows Error Reporting\Consent" /v
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls 
 goto wsettings
@@ -1832,11 +2116,12 @@ Reg.exe add "HKLM\Software\Microsoft\Windows\CurrentVersion\DeliveryOptimization
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :Noti
@@ -1866,11 +2151,12 @@ Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\AdvertisingInfo" /v "Disab
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :Wintwk
@@ -1896,11 +2182,12 @@ Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Multitaskin
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :Menuk
@@ -1914,11 +2201,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control" /v "WaitToKillServiceTimeout
 echo.
 echo.
 echo.
-echo.                                              %b%"I═══════════════════════════════════════════════════════I"
+echo.                                              %b%"I=======================================================I"
 echo.                                                    %w%  Operation Completed, Press any key to continue...
-echo.                                              %b%"I═══════════════════════════════════════════════════════I"
+echo.                                              %b%"I=======================================================I"
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 
@@ -1941,11 +2229,12 @@ Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 :Addi
@@ -1976,11 +2265,12 @@ Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\EnhancedStorageDevices" /v
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto wsettings
 
 
@@ -2044,9 +2334,9 @@ ipconfig /renew
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :more
@@ -2061,9 +2351,9 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\System
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :more
@@ -2081,11 +2371,12 @@ Reg.exe add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 
@@ -2094,9 +2385,9 @@ Reg.exe add "HKCU\Software\Microsoft\Windows\Shell\Bags\1\Desktop" /v "FFlags" /
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :more
@@ -2112,9 +2403,9 @@ w32tm /resync /rediscover
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :more
@@ -2132,9 +2423,9 @@ Reg.exe add "HKCR\LibraryFolder" /v "NeverShowExt" /f
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :more
@@ -2144,9 +2435,9 @@ Reg.exe add "HKCU\Control Panel\Desktop" /v "JPEGImportQuality" /t REG_DWORD /d 
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :more
@@ -2157,9 +2448,9 @@ Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "AltTab
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 clsgoto :more
 
@@ -2175,9 +2466,9 @@ control mmsys.cpl sounds
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :more
@@ -2196,9 +2487,9 @@ Reg.exe ADD "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v 
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto more
@@ -2256,9 +2547,9 @@ md "%AppData%\Discord\Code Cache"
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :clean
@@ -2276,9 +2567,9 @@ ATTRIB +r "C:\ProgramData\Microsoft\Search\Data\Applications\Windows\Windows.edb
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 
@@ -2295,9 +2586,9 @@ chcp 65001 > nul
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :clean
@@ -2310,9 +2601,9 @@ chcp 65001 > nul
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :clean
@@ -2379,9 +2670,9 @@ reg add "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WDI\{9c5a40da-b9
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :debloat
@@ -2466,9 +2757,9 @@ schtasks /Change /TN "Microsoft\Windows\WwanSvc\OobeDiscovery" /Disable
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :debloat
@@ -2483,9 +2774,9 @@ Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupAppr
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :debloat
@@ -2522,11 +2813,12 @@ for %%F in ("%StartupFolder%\*" "%StartupAll%\*") do (
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 :chrome
@@ -2580,9 +2872,9 @@ Reg.exe add "HKLM\SOFTWARE\Policies\Google\Update" /v "UpdatesSuppressedDuration
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :debloat
@@ -2694,11 +2986,12 @@ chcp 65001 > nul
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 
@@ -2748,11 +3041,12 @@ chcp 65001 > nul
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto menu
 
 :per
@@ -2830,11 +3124,12 @@ Reg.exe add "HKEY_USERS\.DEFAULT\Control Panel\Keyboard" /v "KeyboardSpeed" /t R
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 :gpu
@@ -3049,11 +3344,12 @@ fsutil behavior set memoryusage 2
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :gpu
 
 :nvgpu
@@ -3185,9 +3481,9 @@ rd /s /q "C:\Nvidia\GFExperience\www"
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :nv
@@ -3196,9 +3492,9 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :nv
@@ -3207,9 +3503,9 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :nv
@@ -3222,9 +3518,9 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Power" /v "Rm
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :nv
@@ -3234,9 +3530,9 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Scheduler" /v
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :nv
@@ -3254,9 +3550,9 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" /v "TdrTestM
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :nv
@@ -3270,9 +3566,9 @@ Reg.exe add "HKLM\System\CurrentControlSet\Control\Class{4d36e968-e325-11ce-bfc1
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :nv
@@ -3281,9 +3577,9 @@ goto :nv
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :nv
@@ -3303,9 +3599,9 @@ schtasks /change /disable /tn "NvTmMon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
 echo.
 echo.
 echo.
-echo.                                              %b%"I═══════════════════════════════════════════════════════I"
+echo.                                              %b%"I=======================================================I"
 echo.                                                    %w%  Operation Completed, Press any key to continue...
-echo.                                              %b%"I═══════════════════════════════════════════════════════I"
+echo.                                              %b%"I=======================================================I"
 pause > nul
 cls
 goto :nv
@@ -3325,9 +3621,9 @@ timeout /t 1 /nobreak > NUL
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :nv
@@ -3344,9 +3640,9 @@ for /f %%f in ('wmic path Win32_VideoController get PNPDeviceID^| findstr /L "PC
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :nv
@@ -3362,9 +3658,9 @@ goto :nv
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :nv
@@ -3385,9 +3681,9 @@ Reg.exe add "HKLM\SOFTWARE\NVIDIA Corporation\Global\NVTweak" /v "DisplayPowerSa
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :nv
@@ -3453,9 +3749,9 @@ Reg.exe add "HKLM\SYSTEM\ControlSet001\Services\nvlddmkm" /v "DisableCudaContext
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :nv
@@ -3486,11 +3782,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 
@@ -3561,9 +3858,9 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :nv
@@ -3920,11 +4217,12 @@ Reg.exe add "HKLM\SYSTEM\ControlSet001\Control\Class\{4d36e968-e325-11ce-bfc1-08
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :gpu
 
 
@@ -3957,11 +4255,12 @@ Reg.exe add "HKLM\Software\Intel\GMM" /v "DedicatedSegmentSize" /t REG_DWORD /d 
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :gpu
 
 
@@ -4030,11 +4329,12 @@ for %%a in (
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 
@@ -4045,11 +4345,12 @@ Reg.exe add "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters\Interrupt 
 )
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :usb
 
 :umsi
@@ -4062,11 +4363,12 @@ Reg.exe add "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters\Interrupt 
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :usb
 
 :savingp
@@ -4121,11 +4423,12 @@ Reg.exe add "HKLM\System\CurrentControlSet\Enum\%%u\Device Parameters" /v "Selec
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :usb
 
 :twkusb
@@ -4143,11 +4446,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\DXGKrnl\Parameters" /v "Thre
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :usb
 
 
@@ -4211,11 +4515,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" /v "HwSchedM
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 
@@ -4262,7 +4567,7 @@ echo.
 echo %b%__________________________________________________________________________________
 
 set /p input=:
-if /i %input% == 1 goto IO tweaks
+if /i %input% == 1 goto IO_tweaks
 if /i %input% == 2 goto latency
 if /i %input% == 3 goto mitigation
 if /i %input% == 4 goto Kernel
@@ -4313,11 +4618,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\DXGKrnl" /v "MonitorRefreshL
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :MENU
 
 :god23
@@ -4378,11 +4684,12 @@ Reg.exe add "HKLM\SOFTWARE\WOW6432Node\Microsoft\DirectDraw" /v "ForceRefreshRat
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :75h
@@ -4391,11 +4698,12 @@ Reg.exe add "HKLM\SOFTWARE\WOW6432Node\Microsoft\DirectDraw" /v "ForceRefreshRat
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :120h
@@ -4404,11 +4712,12 @@ Reg.exe add "HKLM\SOFTWARE\WOW6432Node\Microsoft\DirectDraw" /v "ForceRefreshRat
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :144h
@@ -4417,11 +4726,12 @@ Reg.exe add "HKLM\SOFTWARE\WOW6432Node\Microsoft\DirectDraw" /v "ForceRefreshRat
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :160h
@@ -4430,11 +4740,12 @@ Reg.exe add "HKLM\SOFTWARE\WOW6432Node\Microsoft\DirectDraw" /v "ForceRefreshRat
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :165h
@@ -4443,11 +4754,12 @@ Reg.exe add "HKLM\SOFTWARE\WOW6432Node\Microsoft\DirectDraw" /v "ForceRefreshRat
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :240h
@@ -4456,11 +4768,12 @@ Reg.exe add "HKLM\SOFTWARE\WOW6432Node\Microsoft\DirectDraw" /v "ForceRefreshRat
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :280h
@@ -4469,11 +4782,12 @@ Reg.exe add "HKLM\SOFTWARE\WOW6432Node\Microsoft\DirectDraw" /v "ForceRefreshRat
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :360h
@@ -4482,11 +4796,12 @@ Reg.exe add "HKLM\SOFTWARE\WOW6432Node\Microsoft\DirectDraw" /v "ForceRefreshRat
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 
@@ -4497,11 +4812,12 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Serialize" 
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :god21
@@ -4513,11 +4829,12 @@ for /f %%i in ('reg query "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services"
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 :Multi
 ::MICROSOFT MULTIMEDIA TWEAKS
@@ -4528,11 +4845,12 @@ Reg.exe add "HKCU\SOFTWARE\Microsoft\Games" /v "GameFluidity" /t REG_DWORD /d "1
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :SMB
@@ -4550,11 +4868,12 @@ chcp 65001 > nul
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 :firm
 ::Enable Memory Mapping for PCI-E devices
@@ -4566,11 +4885,12 @@ bcdedit /set usefirmwarepcisettings No
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :reinforce
@@ -4599,11 +4919,12 @@ Reg.exe add "HKLM\System\CurrentControlSet\Control\SecurityProviders\WDigest" /v
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 
@@ -4615,11 +4936,12 @@ Reg.exe add "HKLM\Software\Policies\Microsoft\DeviceHealthAttestationService" /v
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :game
@@ -4632,11 +4954,12 @@ Reg.exe add "HKCU\SOFTWARE\Microsoft\Games" /v "GameFluidity" /t REG_DWORD /d "1
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 
@@ -4664,11 +4987,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\XboxNetApiSvc" /v Start /t R
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :latencytolernace
@@ -4694,11 +5018,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :searchopt
@@ -4727,11 +5052,12 @@ Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "DoNotU
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :NFTS
@@ -4743,11 +5069,12 @@ fsutil behavior set encryptpagingfile 0
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 
@@ -4778,11 +5105,12 @@ Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "DoNotU
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :god12
@@ -4790,11 +5118,12 @@ dism.exe /Online /Disable-Feature:Microsoft-Hyper-V
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :nolazy
@@ -4803,11 +5132,12 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\System
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :10ski
@@ -4815,11 +5145,12 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintena
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 
@@ -4868,11 +5199,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa\Credssp" /v "DebugLogLeve
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :insd
@@ -4881,11 +5213,12 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\System\AllowExperimen
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 
@@ -4906,11 +5239,12 @@ Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\OneDrive" /v "DisableLibra
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 
@@ -4964,11 +5298,12 @@ Reg.exe add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Memory\NoCap"
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :mitigation
@@ -5048,11 +5383,12 @@ timeout /t 1 /nobreak > nul
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :wub
@@ -5123,11 +5459,12 @@ Reg.exe add "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows NT\CurrentVersion\Image
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 
@@ -5151,11 +5488,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "I
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 
@@ -5173,11 +5511,12 @@ timeout /t 1 /nobreak > nul
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 :random
@@ -5213,11 +5552,12 @@ timeout /t 1 /nobreak > nul
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :god
 
 
@@ -5264,9 +5604,9 @@ dism /online /cleanup-image /restorehealth
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :fix
@@ -5277,9 +5617,9 @@ SFC /scannow
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :fix
@@ -5334,11 +5674,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\memory manage
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 :memski
@@ -5348,11 +5689,12 @@ chcp 65001 > nul
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :ram
 
 :memsk
@@ -5362,11 +5704,12 @@ chcp 65001 > nul
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :ram
 
 :preftch
@@ -5376,11 +5719,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Manage
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :ram
 
 
@@ -5390,11 +5734,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInK
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :ram
 
 :reged
@@ -5435,11 +5780,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Manage
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :ram
 
 
@@ -5489,9 +5835,9 @@ for /f "Delims=" %%k in ('Reg.exe Query hklm\SYSTEM\CurrentControlSet\Enum /f "{
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :storage
@@ -5503,9 +5849,9 @@ for /f "Delims=" %%k in ('Reg.exe Query hklm\SYSTEM\CurrentControlSet\Enum /f "{
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :storage
@@ -5556,9 +5902,9 @@ fsutil behavior set disable8dot3 0
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :storage
@@ -5570,9 +5916,9 @@ fsutil behavior set disable8dot3 1
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :storage
@@ -5587,11 +5933,12 @@ chcp 65001 > nul
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 
@@ -5657,11 +6004,12 @@ goto :priority
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :priority
 
 :pr11
@@ -5682,11 +6030,12 @@ for %%a in (
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :priority
 
 :pr12
@@ -5783,11 +6132,12 @@ Reg.exe add "HKLM\SYSTEM\ControlSet002\Control\Power\PowerSettings\54533251-82be
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 
@@ -5797,11 +6147,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl" /v "Win32Pri
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :priority
 
 :gamepriority
@@ -5982,11 +6333,12 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execut
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto menu
 
 :fivem
@@ -6119,9 +6471,9 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execut
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto gamepriority
@@ -6256,9 +6608,9 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execut
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto gamepriority
@@ -6393,9 +6745,9 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execut
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto gamepriority
@@ -6532,9 +6884,9 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execut
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto gamepriority
@@ -6670,9 +7022,9 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execut
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto gamepriority
@@ -6705,11 +7057,12 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\System
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :priority
 
 :wmngr
@@ -6722,11 +7075,12 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\System
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :priority
 
 :crss
@@ -6736,11 +7090,12 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execut
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :priority
 
 :irq8
@@ -6749,11 +7104,12 @@ Reg.exe add "HKLM\SYSTEM\ControlSet001\Control\PriorityControl" /v "IRQ8Priority
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :priority
 
 :irq16
@@ -6762,11 +7118,12 @@ Reg.exe add "HKLM\SYSTEM\ControlSet001\Control\PriorityControl" /v "IRQ16Priorit
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :priority
 
 
@@ -6778,11 +7135,12 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execut
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :priority
 
 
@@ -6794,11 +7152,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\Parameters" /v "Thr
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :priority
 
 :sysrep
@@ -6806,11 +7165,12 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\System
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :priority
 
 
@@ -6905,11 +7265,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power\EnergyEstimation\Storag
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto menu
 
 
@@ -6923,11 +7284,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power\ModernSleep" /v "Coales
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto power
 
 :p14
@@ -6938,11 +7300,12 @@ powercfg -delete a1841308-3541-4fab-bc81-f71556f20b4a
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 :p11
@@ -6954,11 +7317,12 @@ chcp 65001 > nul
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 :gpuenrg
@@ -6967,11 +7331,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\GpuEnergyDr" /v "Start" /t R
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 :dpower
@@ -6985,11 +7350,12 @@ for /f "tokens=*" %%i in ('reg query "HKLM\SYSTEM\CurrentControlSet\Enum" /s /f 
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 
@@ -7006,11 +7372,12 @@ Reg.exe add HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling /v Power
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 :wpower
@@ -7039,11 +7406,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v "Hi
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 :kbst
@@ -7055,11 +7423,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 
@@ -7075,9 +7444,9 @@ timeout /t 1 /nobreak > nul
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 
@@ -7091,11 +7460,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" /v "Po
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 
@@ -7111,11 +7481,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control" /v "CoalescingTimerInterval"
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 
@@ -7135,11 +7506,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251_
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 
@@ -7152,11 +7524,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power\EnergyEstimation\Tagged
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 :p15
@@ -7180,11 +7553,12 @@ timeout /t 1 /nobreak > NUL
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 :linkpwr
@@ -7201,11 +7575,12 @@ SET STR=!STR:HKLM\System\CurrentControlSet\Services\=!
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 :idlepwr
@@ -7215,11 +7590,12 @@ for /f "tokens=*" %%i in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Enum" /s /f 
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 
@@ -7271,11 +7647,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251_
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :power
 
 
@@ -7333,11 +7710,12 @@ Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "AppCapt
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 :revrt
@@ -7353,11 +7731,12 @@ Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" /v "AppCapt
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 
@@ -7433,11 +7812,12 @@ Reg.exe add "HKCU\Control Panel\Accessibility\MouseKeys" /v "Flags" /t REG_SZ /d
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 
@@ -7453,11 +7833,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\mouhid\Parameters" /v "Treat
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :mouse
 
 :1to1
@@ -7470,11 +7851,12 @@ Reg.exe add "HKCU\Control Panel\Mouse" /v "SmoothMouseYCurve" /t REG_BINARY /d "
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :mouse
 
 :thread
@@ -7486,11 +7868,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\kbdclass\Parameters" /v "Thr
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :mouse
 
 
@@ -7506,11 +7889,12 @@ Reg.exe add "HKCU\Control Panel\Keyboard" /v "KeyboardSpeed" /t REG_SZ /d "31" /
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :mouse
 
 
@@ -7525,11 +7909,12 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execut
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :mouse
 
 
@@ -7572,11 +7957,12 @@ Reg.exe add "HKCU\Control Panel\Mouse" /v "MouseHoverTime" /t REG_SZ /d "8" /f
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :mouse
 
 
@@ -7642,11 +8028,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\kbdclass\Parameters" /v "Key
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :mouse
 
 :15
@@ -7657,11 +8044,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\kbdclass\Parameters" /v "Key
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :mouse
 
 :17
@@ -7672,11 +8060,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\kbdclass\Parameters" /v "Key
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :mouse
 
 :20
@@ -7687,11 +8076,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\kbdclass\Parameters" /v "Key
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :mouse
 
 :25
@@ -7702,11 +8092,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\kbdclass\Parameters" /v "Key
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :mouse
 
 :30
@@ -7717,11 +8108,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\kbdclass\Parameters" /v "Key
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :mouse
 
 
@@ -7732,11 +8124,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\mouclass\Parameters" /v "Mou
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :mouse
 
 
@@ -7770,11 +8163,12 @@ bcdedit /set vsmlaunchtype off
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :Menu
 
 
@@ -7907,7 +8301,7 @@ timeout /t 1 /nobreak > NUL
 
 :: Set MTU Size to 1500
 echo Setting MTU Size
-netsh interface ipv4 set subinterface “Ethernet” mtu=1500 store=persistent
+netsh interface ipv4 set subinterface "Ethernet" mtu=1500 store=persistent
 timeout /t 1 /nobreak > NUL
 
 :: Disable NonSackRTTresiliency
@@ -7987,9 +8381,9 @@ timeout /t 1 /nobreak > NUL
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :net
@@ -8024,9 +8418,9 @@ timeout /t 1 /nobreak > NUL
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :net
@@ -8036,9 +8430,9 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\System
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :net
@@ -8051,9 +8445,9 @@ timeout /t 1 /nobreak > nul
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :net
@@ -8063,9 +8457,9 @@ netsh int tcp set global dca=enabled
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :net
@@ -8082,9 +8476,9 @@ Reg.exe add "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters\Interrupt 
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :net
@@ -8189,9 +8583,9 @@ ipconfig /renew
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :net
@@ -8218,9 +8612,9 @@ sc config WlanSvc start= demand
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :net
@@ -8234,9 +8628,9 @@ timeout /t 1 /nobreak > nul
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :net
@@ -8248,9 +8642,9 @@ netsh int ip set global taskoffload=disabled
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :net
@@ -8276,9 +8670,9 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces"
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :net
@@ -8291,9 +8685,9 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :net
@@ -8318,9 +8712,9 @@ ipconfig /renew
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :net
@@ -8343,9 +8737,9 @@ netsh interface tcp set heuristics disabled
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :net
@@ -8400,9 +8794,9 @@ Reg.exe add "%%n" /v "WolShutdownLinkSpeed" /t REG_SZ /d "2" /f
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :net
@@ -8497,9 +8891,9 @@ timeout /t 1 /nobreak > nul
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :net
@@ -8559,9 +8953,9 @@ timeout /t 1 /nobreak > nul
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
 goto :net
@@ -8578,11 +8972,12 @@ timeout /t 1 /nobreak > nul
 echo.
 echo.
 echo.
-echo.                                              %b%╔═══════════════════════════════════════════════════════╗
-echo.                                              %b%║  %w%  Operation Completed, Press any key to continue...  %b%║
-echo.                                              %b%╚═══════════════════════════════════════════════════════╝
+echo.                                              %b%[=======================================================]
+echo.                                              %b%|  %w%  Operation Completed, Press any key to continue...  %b%|
+echo.                                              %b%[=======================================================]
 pause > nul
 cls
+if defined FULL_TWEAKS_MODE goto :eof
 goto :menu
 
 
