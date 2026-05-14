@@ -1093,8 +1093,24 @@ if /i "%fullmode%"=="3" set "FULL_PROFILE=DEEPPLUS"
 if /i "%fullmode%"=="X" goto menu
 if not defined FULL_PROFILE goto fulltweaks
 
+if /i "%FULL_PROFILE%"=="DEEPPLUS" (
+  cls
+  echo.
+  echo %b%__________________________________________________________________________________
+  echo %w%                    Deep+ Variant Selection
+  echo %b%__________________________________________________________________________________
+  echo.
+  echo %p%[1]%w% Balanced (recommended)
+  echo %p%[2]%w% Competitive (max latency focus)
+  set /p dvariant=: 
+  if /i "%dvariant%"=="1" set "DEEPPLUS_VARIANT=BALANCED"
+  if /i "%dvariant%"=="2" set "DEEPPLUS_VARIANT=COMPETITIVE"
+  if not defined DEEPPLUS_VARIANT goto fulltweaks
+)
+
 cls
 echo %y%Full Tweaks Profile: %FULL_PROFILE%
+if /i "%FULL_PROFILE%"=="DEEPPLUS" echo %y%Deep+ Variant: %DEEPPLUS_VARIANT%
 echo.
 echo %w%This will adjust:
 echo  - Windows Tweaks (except Bluetooth/Printing+Maps)
@@ -1117,6 +1133,7 @@ echo  [Power/CPU/GPU] latency-- fps stability++ heat/power usage++
 echo  [USB/Mouse] input delay-- responsiveness++
 echo  [Storage/RAM] I/O latency-- memory behavior tuned
 echo  [Network] Deep+ keeps download speed equal or better (no bufferbloat-slow profile)
+if /i "%DEEPPLUS_VARIANT%"=="COMPETITIVE" echo  [Competitive] adds adapter priority tuning for lower latency
 echo.
 set /p confirm=%g%Apply these tweaks now? (YES/NO): %w%
 if /i not "%confirm%"=="YES" goto menu
@@ -1124,6 +1141,7 @@ if /i not "%confirm%"=="YES" goto menu
 cls
 echo Running Full Tweaks (%FULL_PROFILE%)...
 if /i "%FULL_PROFILE%"=="DEEPPLUS" echo Deep+ policy: skipping network tweaks that reduce download speed.
+if /i "%DEEPPLUS_VARIANT%"=="COMPETITIVE" echo Deep+ Competitive: enabling additional low-latency network priority tuning.
 set "FULL_TWEAKS_MODE=1"
 
 call :Telemtry
@@ -1186,6 +1204,8 @@ call :pr12
 if /i "%FULL_PROFILE%"=="DEEP" call :IO tweaks
 if /i "%FULL_PROFILE%"=="DEEPPLUS" call :IO tweaks
 if /i "%FULL_PROFILE%"=="DEEPPLUS" call :fsutil
+if /i "%DEEPPLUS_VARIANT%"=="COMPETITIVE" call :n13
+if /i "%DEEPPLUS_VARIANT%"=="COMPETITIVE" call :n14
 call :latency
 call :Kernel
 call :random
@@ -1265,6 +1285,7 @@ call :directx
 
 set "FULL_TWEAKS_MODE="
 set "FULL_PROFILE="
+set "DEEPPLUS_VARIANT="
 echo.
 echo %b%╔═══════════════════════════════════════════════════════╗
 echo %b%║  %w%  Full Tweaks Completed, Press any key to continue...  %b%║
